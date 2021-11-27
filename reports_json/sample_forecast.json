@@ -1,0 +1,15 @@
+{
+	"current_value": 0,
+	"unit": "cpm",
+	"current_date": "04/12/2017",
+	"forecast_date": "05/12/2017",
+	"forecast_value": 23
+	"forecast_report": {
+		"report _type": "forecast",
+		"radiation_label": "average",
+		"min_value": 12,
+		"max_value": 25,
+		"description": "Average Background Radiation, Not dangerous.",
+		"advice": "Expect an average amount of radiation. Nothing dangeorus."
+	}
+}

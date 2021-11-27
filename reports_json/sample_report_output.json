@@ -1,0 +1,13 @@
+{
+	"current_value": 14,
+	"unit": "cpm"
+	"current_date": "04/12/2017",
+	"current_report": {
+		"report _type": "current",
+		"radiation_label": "average",
+		"min_value": 12,
+		"max_value": 25,
+		"description": "Average Background Radiation, Not dangerous.",
+		"advice": "Nothing to worry about."
+	}
+}
