@@ -5,6 +5,17 @@ async function onLocationSubmit() {
     let latitude = document.getElementById("latitude");
 
     let response = await fetch(`${baseApiURL}?lat=${latitude}&lon=${longitude}`);
-    let data = await response.text();
-    console.log(data);
+    let data = await response.json();
+    let parsedData = JSON.parse(data);
+
+    let forecastHtml = document.getElementById("forecast")
+    forecastHtml.style.visibility='visible';
+    
+    document.getElementById('current-value').innerHTML = "Current value: " + parsedData.current_value;
+    document.getElementById('radiation-label').innerHTML = "Radiation label: " + parsedData.forecast_report.radiation_label;
+    document.getElementById('minimum-value').innerHTML = "Minimum value: " + parsedData.forecast_report.min_value;
+    document.getElementById('maximum-value').innerHTML = "Maximum value: " + parsedData.forecast_report.max_value;
+    document.getElementById('advice').innerHTML = parsedData.forecast_report.advice;
+    document.getElementById('description').innerHTML = parsedData.forecast_report.description;
+
 }

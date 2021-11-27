@@ -1,0 +1,22 @@
+#input {
+    padding: 1em;
+}
+
+#input button {
+    margin-top: 1em;
+}
+
+#input input {
+    padding: 0.25em;
+    margin: 0.25em;
+}
+
+#title {
+    padding: 0.25em;
+    margin: 0.25em;
+}
+
+#forecast {
+    padding: 1em;
+    visibility: hidden;
+}
