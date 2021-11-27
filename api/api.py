@@ -18,7 +18,7 @@ def get_forecast():
         'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0'
     }
 
-    response = requests.get(f'https://api.safecast.org/measurements.json?latitude={str(lat)}&longitude={str(lon)}', headers=headers)
+    response = requests.get(f'https://api.safecast.org/measurements.json?latitude={lat}&longitude={lon}', headers=headers)
     response.raise_for_status
     # access JSON content
     jsonResponse = response.json()
