@@ -1,5 +1,15 @@
 const baseApiURL = "http://localhost:5000/api/"
 
+function setUserLocation() {
+    var startPos;
+    var geoSuccess = function(position) {
+        startPos = position;
+        document.getElementById('latitude').value = startPos.coords.latitude;
+        document.getElementById('longitude').value = startPos.coords.longitude;
+    };
+    navigator.geolocation.getCurrentPosition(geoSuccess);
+};
+
 async function onLocationSubmit() {
     let longitude = document.getElementById("longitude");
     let latitude = document.getElementById("latitude");
