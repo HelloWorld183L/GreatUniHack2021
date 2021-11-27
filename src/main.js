@@ -17,5 +17,10 @@ async function onLocationSubmit() {
     document.getElementById('maximum-value').innerHTML = "Maximum value: " + parsedData.forecast_report.max_value;
     document.getElementById('advice').innerHTML = parsedData.forecast_report.advice;
     document.getElementById('description').innerHTML = parsedData.forecast_report.description;
+}
 
+// Little function just to check how the forecast looks...
+function testFunction() {
+    let forecastHtml = document.getElementById("forecast")
+    forecastHtml.style.visibility='visible';
 }
