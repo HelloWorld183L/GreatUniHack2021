@@ -9,8 +9,8 @@ function setUserLocation() {
 };
 
 async function onLocationSubmit() {
-    let longitude = document.getElementById("longitude");
-    let latitude = document.getElementById("latitude");
+    let longitude = document.getElementById("longitude").value;
+    let latitude = document.getElementById("latitude").value;
 
     let response = await fetch(`${baseApiURL}?lat=${latitude}&lon=${longitude}`);
     let data = await response.json();
