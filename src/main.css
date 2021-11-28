@@ -1,0 +1,30 @@
+#input {
+    padding: 1em;
+}
+
+#input button {
+    margin-top: 1em;
+}
+
+#input input {
+    padding: 0.25em;
+    margin: 0.25em;
+}
+
+#title h1 {
+    padding: 0.25em;
+    margin: 0.25em;
+    text-align: center;
+    text-decoration: underline;
+}
+
+#title h2 {
+    margin-top: 1em;
+    text-align: center;
+    font-weight: normal;
+}
+
+#forecast {
+    padding: 1em;
+    visibility: hidden;
+}
