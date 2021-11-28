@@ -22,10 +22,7 @@ def get_current_report():
 
     # set headers
     headers = {
-<<<<<<< HEAD
         # 'mode':'cors',
-=======
->>>>>>> 2c18074da47f5de59c10a502ab7a2eb2c2bdeb5a
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET',
         'Access-Control-Allow-Headers': 'Content-Type',
@@ -161,6 +158,7 @@ def get_forecast_report():
                     "forecast_report": forecast[respLabel]
                 }
 
+    print(respObject)
     return respObject
 
 # error handling
