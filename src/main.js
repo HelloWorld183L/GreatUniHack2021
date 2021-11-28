@@ -23,7 +23,8 @@ async function onLocationSubmit() {
       return;
     }
 
-    fetch(`${baseForecastUrl}?lat=${latitude}&lon=${longitude}&date=${forecastDate}`).then((response) => {
+    let formattedForecastDate = `${forecastDate.getFullYear()}-${forecastDate.getMonth()+1}-${forecastDate.getDate()} ${forecastDate.toLocaleTimeString()}`;
+    fetch(`${baseForecastUrl}?lat=${latitude}&lon=${longitude}&forecast_date=${formattedForecastDate}`).then((response) => {
         if (response.ok) {
           return response.json();
         } else {
@@ -31,9 +32,7 @@ async function onLocationSubmit() {
         }
       })
       .then((responseJson) => setHtmlValues(responseJson))
-      .catch((error) => {
-        console.log(error)
-      });
+      .catch((error) => console.log(error));
 }
 
 function setHtmlValues(responseJson) {
