@@ -12,6 +12,7 @@ def get_forecast():
 
     # set headers
     headers = {
+        'mode': 'cors',
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET',
         'Access-Control-Allow-Headers': 'Content-Type',

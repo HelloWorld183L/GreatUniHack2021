@@ -1,4 +1,4 @@
-const baseApiURL = "http://localhost:5000/api/"
+const baseApiURL = "http://127.0.0.1:5000/api"
 
 function setUserLocation() {
     var geoSuccess = function(position) {
@@ -12,19 +12,28 @@ async function onLocationSubmit() {
     let longitude = document.getElementById("longitude").value;
     let latitude = document.getElementById("latitude").value;
 
-    let response = await fetch(`${baseApiURL}?lat=${latitude}&lon=${longitude}`);
-    let data = await response.json();
-    let parsedData = JSON.parse(data);
+    fetch(`${baseApiURL}?lat=${latitude}&lon=${longitude}`).then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('Something went wrong');
+        }
+      })
+      .then((responseJson) => {
+        let forecastHtml = document.getElementById("forecast")
+        forecastHtml.style.visibility='visible';
 
-    let forecastHtml = document.getElementById("forecast")
-    forecastHtml.style.visibility='visible';
-    
-    document.getElementById('current-value').innerHTML = "Current value: " + parsedData.current_value;
-    document.getElementById('radiation-label').innerHTML = "Radiation label: " + parsedData.forecast_report.radiation_label;
-    document.getElementById('minimum-value').innerHTML = "Minimum value: " + parsedData.forecast_report.min_value;
-    document.getElementById('maximum-value').innerHTML = "Maximum value: " + parsedData.forecast_report.max_value;
-    document.getElementById('advice').innerHTML = parsedData.forecast_report.advice;
-    document.getElementById('description').innerHTML = parsedData.forecast_report.description;
+        console.log(responseJson);
+        document.getElementById('current-value').innerHTML = "Current value: " + `${responseJson.current_value} ${responseJson.unit}`;
+        document.getElementById('radiation-label').innerHTML = "Radiation label: " + responseJson.current_report.radiation_label;
+        document.getElementById('minimum-value').innerHTML = "Minimum value: " + responseJson.current_report.min_value;
+        document.getElementById('maximum-value').innerHTML = "Maximum value: " + responseJson.current_report.max_value;
+        document.getElementById('advice').innerHTML = responseJson.current_report.advice;
+        document.getElementById('description').innerHTML = responseJson.current_report.description;
+      })
+      .catch((error) => {
+        console.log(error)
+      });
 }
 
 // Little function just to check how the forecast looks...
