@@ -4,7 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## API Requirements
 
-To install the requirements for the API, run the following in the root project directory:\
+The API requires *at least* Python **3.10**. To install the requirements for the API, run the following in the root project directory:\
 `pip install -r requirements.txt`
 
 ## Available Scripts
