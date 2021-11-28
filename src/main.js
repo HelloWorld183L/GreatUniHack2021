@@ -23,7 +23,8 @@ async function onLocationSubmit() {
       return;
     }
 
-    fetch(`${baseForecastUrl}?lat=${latitude}&lon=${longitude}&date=${forecastDate}`).then((response) => {
+    let formattedForecastDate = `${forecastDate.getDate()}/${forecastDate.getMonth()+1}/${forecastDate.getFullYear()}`;
+    fetch(`${baseForecastUrl}?lat=${latitude}&lon=${longitude}&date=${formattedForecastDate}`).then((response) => {
         if (response.ok) {
           return response.json();
         } else {
