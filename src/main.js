@@ -24,7 +24,7 @@ async function onLocationSubmit() {
         forecastHtml.style.visibility='visible';
 
         console.log(responseJson);
-        document.getElementById('current-value').innerHTML = "Current value: " + `${responseJson.current_value} ${responseJson.unit}`;
+        document.getElementById('current-value').innerHTML  = "Current value: " + `${responseJson.current_value} ${responseJson.unit}`;
         document.getElementById('radiation-label').innerHTML = "Radiation label: " + responseJson.current_report.radiation_label;
         document.getElementById('minimum-value').innerHTML = "Minimum value: " + responseJson.current_report.min_value;
         document.getElementById('maximum-value').innerHTML = "Maximum value: " + responseJson.current_report.max_value;
@@ -34,10 +34,4 @@ async function onLocationSubmit() {
       .catch((error) => {
         console.log(error)
       });
-}
-
-// Little function just to check how the forecast looks...
-function testFunction() {
-    let forecastHtml = document.getElementById("forecast")
-    forecastHtml.style.visibility='visible';
 }
