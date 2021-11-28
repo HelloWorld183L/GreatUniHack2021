@@ -1,11 +1,9 @@
 const baseApiURL = "http://localhost:5000/api/"
 
 function setUserLocation() {
-    var startPos;
     var geoSuccess = function(position) {
-        startPos = position;
-        document.getElementById('latitude').value = startPos.coords.latitude;
-        document.getElementById('longitude').value = startPos.coords.longitude;
+        document.getElementById('latitude').value = position.coords.latitude;
+        document.getElementById('longitude').value = position.coords.longitude;
     };
     navigator.geolocation.getCurrentPosition(geoSuccess);
 };
