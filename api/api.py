@@ -69,7 +69,8 @@ def get_current_report():
     respObject = {'current_value': meanVal,
                   'unit': respUnit,
                   'current_date': time.strftime('%Y-%m-%d'),
-                  "current_report": forecast[respLabel]}
+                  "current_report": forecast[respLabel]
+                  }
                   
                 #   'current_report': {'report_type': 'current',
                 #                      'radiation_label': respLabel,
@@ -128,7 +129,7 @@ def get_forecast_report():
     X = [[unixtime_forecast, float(lat), float(lon)]]
     y = model.predict(X)
 
-    predicted_value = y
+    predicted_value = y[0]
 
     # match severity
     if (predicted_value >= 0) & (predicted_value < 12):
