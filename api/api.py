@@ -4,7 +4,10 @@ import numpy as np
 from sevlevels import levels
 from forecast_reports import forecast
 from joblib import dump, load
+import datetime
 import time
+import traceback
+import sys
 
 app = Flask(__name__)
 
@@ -19,7 +22,7 @@ def get_current_report():
 
     # set headers
     headers = {
-        'mode':'cors',
+        # 'mode':'cors',
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET',
         'Access-Control-Allow-Headers': 'Content-Type',
@@ -113,10 +116,16 @@ def get_forecast_report():
     model = load('xgboost_200k.joblib') 
 
     # for a prediction we need Captured Time, Latitude, Longitude
+    from dateutil import parser
+
     captured_time = int(time.time()) 
+    forecast_date = request.args.get('forecast_date')  
+    forecast_date = parser.parse(forecast_date)
+    # forecast_date = datetime. strptime(forecast_date, '%d/%m/%y') 
+    unixtime_forecast = time.mktime(forecast_date.timetuple())
 
     # X = [[captured_time, lat, lon]]
-    X = [[captured_time, 35, 47]]
+    X = [[unixtime_forecast, float(lat), float(lon)]]
     y = model.predict(X)
 
     predicted_value = y
@@ -149,7 +158,10 @@ def get_forecast_report():
                     "forecast_report": forecast[respLabel]
                 }
 
+    return respObject
+
 # error handling
 @app.errorhandler(Exception)
 def resource_not_found(e):
-    return {'Error': str(e)}
+    return {'Error': str(e),
+            'stacktrace': traceback.format_exc()}
