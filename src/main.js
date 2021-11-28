@@ -12,27 +12,44 @@ function setUserLocation() {
 async function onLocationSubmit() {
     let longitude = document.getElementById("longitude").value;
     let latitude = document.getElementById("latitude").value;
+    let forecastDate = new Date(document.getElementById("forecast-date").value);
 
-    fetch(`${baseForecastUrl}?lat=${latitude}&lon=${longitude}`).then((response) => {
+    let currentDate = getRawDate(new Date());
+    let upperBoundDate = getRawDate(new Date());
+    upperBoundDate.setDate(upperBoundDate.getDate() + 7);
+
+    if (forecastDate < currentDate || forecastDate > upperBoundDate) {
+      alert("Invalid date input! Please enter a date input that is valid.");
+      return;
+    }
+
+    fetch(`${baseForecastUrl}?lat=${latitude}&lon=${longitude}&date=${forecastDate}`).then((response) => {
         if (response.ok) {
           return response.json();
         } else {
           throw new Error('Something went wrong');
         }
       })
-      .then((responseJson) => {
-        let forecastHtml = document.getElementById("forecast")
-        forecastHtml.style.visibility='visible';
-        console.log(responseJson);
-
-        document.getElementById('current-value').innerHTML  = "Current value: " + `${responseJson.current_value} ${responseJson.unit}`;
-        document.getElementById('radiation-label').innerHTML = "Radiation label: " + responseJson.current_report.radiation_label;
-        document.getElementById('minimum-value').innerHTML = "Minimum value: " + responseJson.current_report.min_value;
-        document.getElementById('maximum-value').innerHTML = "Maximum value: " + responseJson.current_report.max_value;
-        document.getElementById('advice').innerHTML = responseJson.current_report.advice;
-        document.getElementById('description').innerHTML = responseJson.current_report.description;
-      })
+      .then((responseJson) => setHtmlValues(responseJson))
       .catch((error) => {
         console.log(error)
       });
+}
+
+function setHtmlValues(responseJson) {
+    let forecastHtml = document.getElementById("forecast")
+    forecastHtml.style.visibility='visible';
+    console.log(responseJson);
+
+    document.getElementById('current-value').innerHTML  = "Current value: " + `${responseJson.current_value} ${responseJson.unit}`;
+    document.getElementById('radiation-label').innerHTML = "Radiation label: " + responseJson.current_report.radiation_label;
+    document.getElementById('minimum-value').innerHTML = "Minimum value: " + responseJson.current_report.min_value;
+    document.getElementById('maximum-value').innerHTML = "Maximum value: " + responseJson.current_report.max_value;
+    document.getElementById('advice').innerHTML = responseJson.current_report.advice;
+    document.getElementById('description').innerHTML = responseJson.current_report.description;
+}
+
+function getRawDate(date) {
+  let rawDate = date.getFullYear()+'/'+(date.getMonth()+1)+'/'+date.getDate();
+  return new Date(rawDate);
 }
