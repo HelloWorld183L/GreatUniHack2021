@@ -4,6 +4,7 @@
         <title>Weather Forecast</title>
         <link rel="stylesheet" type="text/css" href="main.css">
         <script type="text/javascript" src="main.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
         <div id="title">
@@ -13,13 +14,12 @@
         <div id="input">
             <label for="longitude">Longitude: </label>
             <input type="text" id="longitude" name="longitude">
-            <button type="button" onclick="setUserLocation()">Find location</button>
             <br>
             <label for="latitude">Latitude: </label>
             <input type="text" id="latitude" name="latitude">
             <br>
             <button type="button" onclick="onLocationSubmit()">Get weather forecast</button>
-
+            <button type="button" onclick="setUserLocation()">Find location</button>
         </div>
 
         <div id="forecast">
