@@ -2,6 +2,11 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## API Requirements
+
+The API requires *at least* Python **3.10**. To install the requirements for the API, run the following in the root project directory:\
+`pip install -r requirements.txt`
+
 ## Available Scripts
 
 In the project directory, you can run:
