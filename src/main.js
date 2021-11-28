@@ -1,4 +1,5 @@
 const baseApiURL = "http://127.0.0.1:5000/api"
+const baseForecastUrl = "http://127.0.0.1:5000/forecast"
 
 function setUserLocation() {
     var geoSuccess = function(position) {
@@ -12,7 +13,7 @@ async function onLocationSubmit() {
     let longitude = document.getElementById("longitude").value;
     let latitude = document.getElementById("latitude").value;
 
-    fetch(`${baseApiURL}?lat=${latitude}&lon=${longitude}`).then((response) => {
+    fetch(`${baseForecastUrl}?lat=${latitude}&lon=${longitude}`).then((response) => {
         if (response.ok) {
           return response.json();
         } else {
@@ -22,8 +23,8 @@ async function onLocationSubmit() {
       .then((responseJson) => {
         let forecastHtml = document.getElementById("forecast")
         forecastHtml.style.visibility='visible';
-
         console.log(responseJson);
+
         document.getElementById('current-value').innerHTML  = "Current value: " + `${responseJson.current_value} ${responseJson.unit}`;
         document.getElementById('radiation-label').innerHTML = "Radiation label: " + responseJson.current_report.radiation_label;
         document.getElementById('minimum-value').innerHTML = "Minimum value: " + responseJson.current_report.min_value;
